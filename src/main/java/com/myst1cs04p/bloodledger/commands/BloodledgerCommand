@@ -1,0 +1,59 @@
+package com.myst1cs04p.bloodledger.commands;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class BloodLedgerCommand implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (args.length == 0) {
+            sender.sendMessage("§cUsage: /bloodledger <subcommand>");
+            return true;
+        }
+
+        String subCommand = args[0].toLowerCase();
+
+        switch (subCommand) {
+            case "stats":
+                handleStats(sender, args);
+                break;
+
+            case "top":
+                handleTop(sender, args);
+                break;
+
+            case "reset":
+                handleReset(sender, args);
+                break;
+
+            default:
+                sender.sendMessage("§cUnknown subcommand. Try /bloodledger stats|top|reset");
+                break;
+        }
+
+        return true;
+    }
+
+    private void handleStats(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Only players can use this command.");
+            return;
+        }
+
+        Player player = (Player) sender;
+        // Your logic here
+        player.sendMessage("Showing your stats...");
+    }
+
+    private void handleTop(CommandSender sender, String[] args) {
+        sender.sendMessage("Top killers: Coming soon...");
+    }
+
+    private void handleReset(CommandSender sender, String[] args) {
+        sender.sendMessage("Resetting leaderboard...");
+    }
+}
